@@ -1,0 +1,17 @@
+<h2>Child Component</h2>
+<form [formGroup]="childForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let config of configurations">
+      <label>{{ config.label }}</label>
+      <ng-container [ngSwitch]="config.inputType">
+        <input *ngSwitchCase="'text'" [formControlName]="config.label" type="text">
+        <select *ngSwitchCase="'select'" [formControlName]="config.label">
+          <!-- Add select options here -->
+        </select>
+        <div *ngSwitchCase="'radio'">
+          <!-- Add radio buttons here -->
+        </div>
+      </ng-container>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  

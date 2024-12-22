@@ -1,0 +1,27 @@
+<h2>Parent Component</h2>
+<form [formGroup]="parentForm">
+    <div formArrayName="configurations" *ngFor="let config of configurations.controls; let i = index">
+      <div [formGroupName]="i">
+        <label>
+          Label:
+          <input formControlName="label" type="text">
+        </label>
+        <label>
+          Input Type:
+          <select formControlName="inputType">
+            <option *ngFor="let type of inputTypes" [value]="type">{{ type }}</option>
+          </select>
+        </label>
+        <label>
+          Validators:
+          <select formControlName="validators" multiple>
+            <option *ngFor="let validator of validators" [value]="validator">{{ validator }}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <button (click)="addConfiguration()">Add Field</button>
+  </form>
+  <app-child [configurations]="parentForm.value.configurations" (submit)="onSubmit($event)"></app-child>
+  <app-view [formValues]="submittedValues"></app-view>
+  
